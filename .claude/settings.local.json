@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(npx impeccable *)",
+      "Bash(gh api *)",
+      "Bash(curl -s \"https://api.github.com/repos/geethanshr/shadow/contents/public/images\")",
+      "Bash(curl -s \"https://api.github.com/repos/geethanshr/shadow\")",
+      "WebFetch(domain:github.com)",
+      "PowerShell(Get-Command gh -ErrorAction SilentlyContinue)",
+      "PowerShell(winget list --id GitHub.cli 2>&1)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npm audit *)",
+      "Bash(npm view *)",
+      "Bash(rm -rf node_modules package-lock.json)",
+      "Bash(curl -s -X POST http://localhost:3000/api/interest -H \"Content-Type: application/json\" -d '{\"email\":\"test@example.com\",\"packSize\":\"3\",\"colorPreference\":\"matte-black\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/interest -H \"Content-Type: application/json\" -d '{\"email\":\"not-an-email\",\"packSize\":\"3\",\"colorPreference\":\"matte-black\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/interest -H \"Content-Type: application/json\" -d '{\"email\":\"test2@example.com\",\"packSize\":\"9\",\"colorPreference\":\"matte-black\"}')",
+      "Bash(npm run *)",
+      "Bash(rm -rf .next)",
+      "Bash(npm outdated *)",
+      "Bash(rm -rf node_modules package-lock.json .next)",
+      "Bash(npm uninstall *)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/eslint-config-next/package.json'\\).peerDependencies\\)\")",
+      "Bash(echo \"EXIT CODE: $?\")"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/skills/impeccable/scripts/hook.mjs\"",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
+      }
+    ]
+  },
+  "description": "Impeccable design detector: runs after Edit/Write/MultiEdit on UI files and surfaces findings as system reminders."
+}

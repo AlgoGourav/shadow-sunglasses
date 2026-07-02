@@ -1,0 +1,104 @@
+.panel {
+  display: grid;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  border: 1px solid var(--border);
+  background: var(--paper-sunk);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.label {
+  color: var(--ink-muted);
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.packGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xs);
+}
+
+.packOption {
+  position: relative;
+}
+
+.packOption input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.packCard {
+  display: grid;
+  gap: var(--space-3xs);
+  padding: var(--space-sm) var(--space-xs);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  text-align: center;
+  background: var(--paper);
+  transition: border-color var(--duration-base) var(--ease-out-quart),
+    background-color var(--duration-base) var(--ease-out-quart),
+    color var(--duration-base) var(--ease-out-quart);
+}
+
+.packOption input:checked + .packCard {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.packOption input:focus-visible + .packCard {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.packLabel {
+  font-weight: 600;
+  font-size: var(--text-body);
+}
+
+.packPrice {
+  font-size: var(--text-label);
+}
+
+.priceField {
+  text-align: right;
+}
+
+.total {
+  display: block;
+  font-family: var(--font-technical);
+  font-size: var(--text-title);
+  font-weight: 600;
+}
+
+.addButton {
+  width: 100%;
+}
+
+.confirmation {
+  min-height: 1.5rem;
+  font-size: var(--text-body);
+  color: var(--ink-secondary);
+}
+
+.confirmationLink {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

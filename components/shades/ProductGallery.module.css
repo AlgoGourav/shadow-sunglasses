@@ -1,0 +1,57 @@
+.gallery {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--paper-sunk);
+  overflow: hidden;
+}
+
+.frame :global(img) {
+  object-fit: cover;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  transition: opacity var(--duration-slow) var(--ease-out-quart);
+}
+
+.thumbs {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.thumb {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--paper-sunk);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--duration-base) var(--ease-out-quart);
+}
+
+.thumb :global(img) {
+  object-fit: cover;
+}
+
+.thumb:hover {
+  border-color: var(--border-strong);
+}
+
+.thumb[data-active="true"] {
+  border-color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+}

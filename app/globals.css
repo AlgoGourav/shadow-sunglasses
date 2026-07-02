@@ -1,0 +1,179 @@
+:root {
+  /* Color — Product-Is-The-Color Rule: chrome stays achromatic, saturation lives in product imagery/swatches only */
+  --ink: oklch(13% 0 0);
+  --ink-secondary: oklch(40% 0 0);
+  --ink-muted: oklch(50% 0 0);
+  --border: oklch(90% 0 0);
+  --border-strong: oklch(80% 0 0);
+  --paper: oklch(100% 0 0);
+  --paper-sunk: oklch(97% 0 0);
+  --ink-inverse: oklch(98% 0 0);
+  --ink-inverse-secondary: oklch(78% 0 0);
+
+  /* Tint swatch colors — used only for small color-select dots/chips, never as chrome */
+  --tint-matte-black: oklch(22% 0 0);
+  --tint-deep-navy: oklch(30% 0.07 258);
+  --tint-blue-mirror: oklch(56% 0.15 231);
+  --tint-brown-gold: oklch(56% 0.11 68);
+  --tint-forest-green: oklch(36% 0.07 148);
+  --tint-rose-pink: oklch(71% 0.13 8);
+  --tint-royal-purple: oklch(41% 0.16 302);
+  --tint-aurora-gradient: linear-gradient(135deg, oklch(70% 0.14 340), oklch(75% 0.12 90));
+
+  /* Type scale — fluid clamp for display/headline (brand register), fixed for body/label */
+  --text-display: clamp(2.75rem, 1.4rem + 6vw, 6rem);
+  --text-headline: clamp(2rem, 1.3rem + 3vw, 3.25rem);
+  --text-title: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-label: 0.8125rem;
+  --text-caption: 0.75rem;
+
+  /* Spacing — 4pt base scale */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+
+  /* z-index scale */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-modal-backdrop: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+  --z-tooltip: 60;
+
+  --measure: 65ch;
+  --container-max: 1280px;
+
+  --font-sans: var(--font-display), system-ui, sans-serif;
+  --font-technical: var(--font-mono), ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.mono-label {
+  font-family: var(--font-technical);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  z-index: var(--z-toast);
+  background: var(--ink);
+  color: var(--ink-inverse);
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: 4px;
+  transition: top var(--duration-base) var(--ease-out-quart);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--duration-slow) var(--ease-out-quart)
+      calc(var(--reveal-i, 0) * 60ms),
+    transform var(--duration-slow) var(--ease-out-quart)
+      calc(var(--reveal-i, 0) * 60ms);
+}
+
+.reveal.reveal-pending {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
