@@ -70,6 +70,14 @@
   max-width: var(--measure);
 }
 
+.specsOverline {
+  display: inline-block;
+  font-size: 1.35rem;
+  transform: rotate(-2deg);
+  margin-bottom: var(--space-3xs);
+  color: var(--ink);
+}
+
 .specs {
   margin: 0;
   padding: 0;

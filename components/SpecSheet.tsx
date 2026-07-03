@@ -17,10 +17,14 @@ export default function SpecSheet() {
       <div className={styles.layout}>
         <div>
           <Reveal>
+            <span className={`hand-accent ${styles.overline}`}>
+              Unbelievably true
+            </span>
             <h2 className={styles.heading}>UV400 protection, full stop.</h2>
             <p className={styles.lede}>
               Shadow blocks UV the same way a ₹15,000 pair of sunglasses
-              does. The film is 0.1mm thick, and the color is the only thing
+              does. <span className="hand-accent">(Try for yourself.)</span>{" "}
+              The film is 0.1mm thick, and the color is the only thing
               you&apos;re paying to change.
             </p>
           </Reveal>

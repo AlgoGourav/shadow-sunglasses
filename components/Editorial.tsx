@@ -39,6 +39,9 @@ export default function Editorial() {
   return (
     <section className={`${styles.section} container`}>
       <Reveal>
+        <span className={`hand-accent ${styles.overline}`}>
+          Your call, every time
+        </span>
         <h2 className={styles.heading}>Every tint, in its own light.</h2>
         <p className={styles.lede}>
           Coastal dusk, city concrete, deep in the trees: same eight tints,

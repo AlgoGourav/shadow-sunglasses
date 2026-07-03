@@ -8,6 +8,11 @@
   gap: var(--space-2xl);
 }
 
+.goal {
+  margin-bottom: var(--space-2xs);
+  color: var(--ink-muted);
+}
+
 .heading {
   font-size: var(--text-headline);
   font-weight: 700;

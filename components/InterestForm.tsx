@@ -3,6 +3,7 @@
 import { useId, useState, type FormEvent } from "react";
 import Reveal from "./Reveal";
 import Button from "./Button";
+import FirstHundredBadge from "./FirstHundredBadge";
 import styles from "./InterestForm.module.css";
 import { PACKS, type PackSize } from "@/lib/pricing";
 import { TINTS as TINT_CATALOG } from "@/lib/tints";
@@ -73,6 +74,9 @@ export default function InterestForm() {
     <section id="signup" className={styles.section}>
       <div className={`container ${styles.layout}`}>
         <Reveal>
+          <p className={`mono-label ${styles.goal}`}>
+            Be one of the first <FirstHundredBadge /> to reserve
+          </p>
           <h2 className={styles.heading}>Shop Shadow.</h2>
           <p className={styles.lede}>
             Pick your pack and tint, and tell us where to send it.

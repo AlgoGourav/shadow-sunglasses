@@ -10,6 +10,14 @@
   align-items: center;
 }
 
+.overline {
+  display: inline-block;
+  font-size: 1.5rem;
+  transform: rotate(-3deg);
+  margin-bottom: var(--space-3xs);
+  color: var(--ink);
+}
+
 .heading {
   font-size: var(--text-headline);
   font-weight: 700;
@@ -21,6 +29,11 @@
   margin-top: var(--space-sm);
   color: var(--ink-secondary);
   max-width: var(--measure);
+}
+
+.lede :global(.hand-accent) {
+  color: var(--ink);
+  font-size: 1.2em;
 }
 
 .specs {

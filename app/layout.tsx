@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Martian_Mono } from "next/font/google";
+import { Unbounded, Hanken_Grotesk, Martian_Mono, Caveat } from "next/font/google";
 import { CartProvider } from "@/lib/cart-context";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
+const display = Unbounded({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const body = Hanken_Grotesk({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -16,6 +23,13 @@ const mono = Martian_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const script = Caveat({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -48,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable} ${script.variable}`}>
       <body>
         <CartProvider>
           <a href="#main-content" className="skip-link">

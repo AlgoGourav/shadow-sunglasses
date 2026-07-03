@@ -3,6 +3,14 @@
   border-bottom: 1px solid var(--border);
 }
 
+.overline {
+  display: inline-block;
+  font-size: 1.5rem;
+  transform: rotate(-3deg);
+  margin-bottom: var(--space-3xs);
+  color: var(--ink);
+}
+
 .heading {
   font-size: var(--text-headline);
   font-weight: 700;

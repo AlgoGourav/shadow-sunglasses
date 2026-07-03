@@ -35,7 +35,9 @@ export default function CartView() {
         ) : items.length === 0 ? (
           <Reveal delayStep={1} className={styles.empty}>
             <p className={styles.emptyLede}>
-              Nothing in here yet. Pick a tint and add it to your bag.
+              Nothing in here yet.{" "}
+              <span className="hand-accent">Pick a tint</span> and add it to
+              your bag.
             </p>
             <Button href="/#colors" variant="primary">
               Browse tints

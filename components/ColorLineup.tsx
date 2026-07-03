@@ -10,8 +10,19 @@ export default function ColorLineup() {
       <Reveal>
         <h2 className={styles.heading}>Eight tints. One frame, any frame.</h2>
         <p className={styles.lede}>
-          Every tint is the same peelable film. Pick a mood, swap it whenever
-          you want the next one.
+          Every tint is the same peelable film. Pick a mood,{" "}
+          <span className={styles.accent}>
+            swap it
+            <svg
+              className={styles.accentUnderline}
+              viewBox="0 0 120 14"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M2 9C22 3 45 2 60 5C78 8.5 100 4 118 7" />
+            </svg>
+          </span>{" "}
+          whenever you want the next one.
         </p>
       </Reveal>
 

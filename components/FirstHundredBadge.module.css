@@ -1,0 +1,29 @@
+.badge {
+  display: inline-block;
+}
+
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6ch;
+  padding: 0.1em 0.5em;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--ink-inverse);
+  font-family: var(--font-technical);
+  font-weight: 700;
+  font-size: 1.15em;
+  font-variant-numeric: tabular-nums;
+  transition: transform var(--duration-fast) var(--ease-out-quart);
+}
+
+.number[data-pop="true"] {
+  transform: scale(1.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .number {
+    transition: none;
+  }
+}

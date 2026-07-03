@@ -1,0 +1,26 @@
+.wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.16em;
+  width: 100%;
+  height: 0.4em;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.replayPath,
+.scrubPath {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.replayPath {
+  transition: stroke-dashoffset var(--duration-slow) var(--ease-out-quart);
+}

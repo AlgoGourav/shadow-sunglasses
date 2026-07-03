@@ -38,7 +38,10 @@ export default function HowItWorks() {
     <section id="how-it-works" className={styles.section}>
       <div className="container">
         <Reveal>
-          <h2 className={styles.heading}>Four steps. No tools.</h2>
+          <h2 className={styles.heading}>
+            Four steps.{" "}
+            <span className={`hand-accent ${styles.accent}`}>No tools.</span>
+          </h2>
           <p className={styles.lede}>
             Applying and removing Shadow takes less time than cleaning your
             glasses does.

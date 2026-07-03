@@ -82,6 +82,9 @@ export default async function ShadeDetail({
             </Reveal>
 
             <Reveal delayStep={3}>
+              <span className={`hand-accent ${styles.specsOverline}`}>
+                The real numbers
+              </span>
               <ul className={styles.specs}>
                 {specRows.map((spec) => (
                   <li key={spec.label} className={styles.spec}>

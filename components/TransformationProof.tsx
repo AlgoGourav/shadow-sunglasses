@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import HandUnderline from "./HandUnderline";
 import styles from "./TransformationProof.module.css";
 
 export default function TransformationProof() {
@@ -11,7 +12,10 @@ export default function TransformationProof() {
   return (
     <section className={`${styles.section} container`}>
       <Reveal>
-        <h2 className={styles.heading}>Same glasses. Drag to see the difference.</h2>
+        <h2 className={styles.heading}>
+          Same glasses. Drag to see{" "}
+          <HandUnderline mode="scrub">the difference.</HandUnderline>
+        </h2>
         <p className={styles.lede}>
           No new frames, no lost prescription. One tint, pressed on in
           seconds, and your everyday glasses do double duty in the sun.

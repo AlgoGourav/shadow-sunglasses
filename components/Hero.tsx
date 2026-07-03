@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import Button from "./Button";
+import HandUnderline from "./HandUnderline";
 
 export default function Hero() {
   return (
@@ -22,8 +23,13 @@ export default function Hero() {
         </h1>
         <p className={styles.sub}>
           Shadow is a peelable lens tint that sticks to the lens you already
-          have. Real UV protection, not a filter. Peel it off whenever you
-          want the next color.
+          have.{" "}
+          <span className={styles.claim}>
+            <HandUnderline mode="replay">
+              Real UV protection, not a filter.
+            </HandUnderline>
+          </span>{" "}
+          Peel it off whenever you want the next color.
         </p>
         <div className={styles.actions}>
           <Button href="#signup" variant="onDark">

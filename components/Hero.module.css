@@ -58,6 +58,11 @@
   max-width: 42ch;
 }
 
+.claim {
+  color: var(--ink-inverse);
+  font-weight: 600;
+}
+
 .actions {
   margin-top: var(--space-xl);
   display: flex;

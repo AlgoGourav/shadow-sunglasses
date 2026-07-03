@@ -11,6 +11,12 @@
   max-width: 16ch;
 }
 
+.accent {
+  display: inline-block;
+  font-size: 0.9em;
+  transform: rotate(-2deg);
+}
+
 .lede {
   margin-top: var(--space-sm);
   font-size: var(--text-body-lg);

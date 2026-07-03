@@ -27,6 +27,11 @@
   font-size: var(--text-body-lg);
 }
 
+.emptyLede :global(.hand-accent) {
+  color: var(--ink);
+  font-size: 1.3em;
+}
+
 .layout {
   margin-top: var(--space-2xl);
   display: grid;

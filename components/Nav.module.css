@@ -16,7 +16,7 @@
 }
 
 .mark {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.25rem;
   letter-spacing: -0.02em;

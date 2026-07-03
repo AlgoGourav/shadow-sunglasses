@@ -21,7 +21,7 @@
   --tint-aurora-gradient: linear-gradient(135deg, oklch(70% 0.14 340), oklch(75% 0.12 90));
 
   /* Type scale — fluid clamp for display/headline (brand register), fixed for body/label */
-  --text-display: clamp(2.75rem, 1.4rem + 6vw, 6rem);
+  --text-display: clamp(2.25rem, 1.1rem + 5vw, 5.5rem);
   --text-headline: clamp(2rem, 1.3rem + 3vw, 3.25rem);
   --text-title: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
   --text-body-lg: 1.125rem;
@@ -59,8 +59,10 @@
   --measure: 65ch;
   --container-max: 1280px;
 
-  --font-sans: var(--font-display), system-ui, sans-serif;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-heading: var(--font-display), system-ui, sans-serif;
   --font-technical: var(--font-mono), ui-monospace, monospace;
+  --font-accent: var(--font-script), cursive;
 }
 
 * {
@@ -84,9 +86,10 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   letter-spacing: -0.02em;
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 p {
@@ -118,6 +121,13 @@ button {
   font-size: var(--text-label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.hand-accent {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  color: currentColor;
+  margin-right: 0.15em;
 }
 
 .visually-hidden {
