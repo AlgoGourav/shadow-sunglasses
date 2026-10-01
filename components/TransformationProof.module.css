@@ -20,24 +20,24 @@
 .compareWrap {
   margin-top: var(--space-2xl);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .compare {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 960px;
 }
 
 .frame {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1672 / 941;
   overflow: hidden;
-  background: var(--paper-sunk);
+  background: var(--paper);
 }
 
 .frame :global(img) {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .beforeLayer {

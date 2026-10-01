@@ -5,13 +5,13 @@
 
 .frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   background: var(--paper-sunk);
   overflow: hidden;
 }
 
 .frame :global(img) {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .image {
@@ -39,7 +39,7 @@
 }
 
 .thumb :global(img) {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .thumb:hover {

@@ -1,22 +1,13 @@
-import Image from "next/image";
 import styles from "./Hero.module.css";
 import Button from "./Button";
 import HandUnderline from "./HandUnderline";
+import LensDemo from "./LensDemo";
 
 export default function Hero() {
   return (
     <section id="top" className={styles.hero}>
-      <div className={styles.image}>
-        <Image
-          src="/images/ui-hero-bg.png"
-          alt="Sunglasses with a peelable shadow-web tint resting on a car dashboard at dusk"
-          fill
-          priority
-          sizes="100vw"
-        />
-      </div>
-      <div className={styles.scrim} aria-hidden="true" />
-      <div className={`${styles.content} container`}>
+      <LensDemo>
+      <div className={styles.content}>
         <p className={`mono-label ${styles.eyebrow}`}>Fits any glasses you already own</p>
         <h1 className={styles.headline}>
           Turn any glasses into sunglasses.
@@ -32,15 +23,16 @@ export default function Hero() {
           Peel it off whenever you want the next color.
         </p>
         <div className={styles.actions}>
-          <Button href="#signup" variant="onDark">
+          <Button href="#signup" variant="primary">
             Shop now
           </Button>
-          <Button href="#how-it-works" variant="ghostOnDark">
+          <Button href="#how-it-works" variant="ghost">
             See how it works
           </Button>
         </div>
         <p className={styles.note}>8 tints available · swap in a new one anytime</p>
       </div>
+      </LensDemo>
     </section>
   );
 }

@@ -29,14 +29,14 @@ export default function TransformationProof() {
 
           <div className={styles.frame}>
             <Image
-              src="/images/explainer-after.png"
-              alt="The same glasses wearing a dark Shadow tint, functioning as sunglasses"
+              src="/images/hero-optical-blue.webp"
+              alt="The same prescription glasses wearing a full-coverage Blue Mirror Shadow film"
               fill
               sizes="(min-width: 780px) 60vw, 90vw"
             />
             <div className={styles.beforeLayer}>
               <Image
-                src="/images/explainer-before.png"
+                src="/images/hero-optical-clear.webp"
                 alt="Clear prescription glasses with no tint applied"
                 fill
                 sizes="(min-width: 780px) 60vw, 90vw"

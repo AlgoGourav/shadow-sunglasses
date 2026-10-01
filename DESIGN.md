@@ -90,6 +90,16 @@ This section is scoped to *motion* specifically — a hand-drawn stroke that dra
 
 **Reduced motion is not optional.** Every scroll-linked accent renders fully drawn and static by default — server-rendered, no-JS, and `prefers-reduced-motion` all see the finished state immediately, the same philosophy as the `Reveal` scroll-reveal primitive. Motion is added only after mount, never a precondition for the content being visible or legible.
 
+### Approved optical hero exception (October 1, 2026)
+
+The owner explicitly requested and approved a white optical-studio hero with a hands-free, labeled, scroll-linked film application. This is a localized exception to the earlier responsive-only rule, in addition to the existing accent list. The rest of the page retains its sections and restrained interaction feedback.
+
+- Keep the original clear prescription frame anchored. Independent photographic film planes move onto the **front/outside** lens surface and flatten to the measured full usable aperture, to the inner rim. The film is thin flexible adhesive polymer, not a second optical lens.
+- Blue Mirror is the initial demonstration. All eight tints use the same frame; selecting a tint removes the previous film and introduces a fresh one. Removed films are not reusable.
+- Native sticky scrolling only. Stage buttons offer direct control without requiring scroll. No scroll hijacking, autoplay video, decorative continuous camera flight, or pointer capture.
+- White studio photography is approved for hero, comparison, application shots, and the consistent tint lineup. Existing editorial photography remains intact. Typography and monochrome structural UI remain unchanged.
+- Reduced motion shows the applied state in normal flow and allows instant stage/tint changes. No-JavaScript or failed layer loading keeps a complete photographic poster and essential copy visible. Enhanced pinning begins only once required layers decode.
+
 ## 6. Components
 
 *No components exist yet — this project is pre-implementation. Component patterns below are placeholders for the next `/impeccable document` pass once real code exists.*

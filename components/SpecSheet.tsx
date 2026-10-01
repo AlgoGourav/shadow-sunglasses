@@ -5,8 +5,8 @@ import styles from "./SpecSheet.module.css";
 const specs = [
   { label: "UV protection", value: "100% UVA/UVB, UV400" },
   { label: "Material", value: "Optical-grade polymer film, 0.1mm" },
-  { label: "Fit", value: "Universal, trim-to-fit for any lens shape" },
-  { label: "Adhesive", value: "Residue-free, reusable up to 20 applications" },
+  { label: "Fit", value: "Pre-cut to each lens, full coverage to the rim" },
+  { label: "Adhesive", value: "Residue-free, single use. Replace after removal" },
   { label: "Coating", value: "Scratch-resistant" },
   { label: "Removal time", value: "Under 10 seconds" },
 ];
@@ -46,7 +46,7 @@ export default function SpecSheet() {
         <Reveal delayStep={2} className={styles.visual}>
           <Image
             src="/images/ui-placeholder.png"
-            alt="Schematic outline of an aviator frame, representing Shadow's universal fit"
+            alt="Schematic outline of an aviator frame and lens tint film"
             fill
             sizes="(min-width: 900px) 40vw, 90vw"
             loading="lazy"

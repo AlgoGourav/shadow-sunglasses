@@ -16,6 +16,10 @@ A first-time visitor should immediately understand: "this turns any glasses into
 
 Success = visitor grasps the functional value in seconds, then gets pulled in by the color-swap hook, then shops.
 
+### Confirmed application mechanics
+
+Owner-confirmed October 1, 2026: each film is pre-cut to the corresponding lens, adheres to the **outside/front** surface, and covers the full usable lens area to the rim. The original clear prescription lens stays installed. A removed film is not reusable; changing the tint means applying a fresh film.
+
 ## Brand Personality
 
 Modern, Gen Z, cool. Distinct, bold typography is a core identity trait — type should carry as much brand weight as color or imagery. Confident and premium in tone, never juvenile or gimmicky.

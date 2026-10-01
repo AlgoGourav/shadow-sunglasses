@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import styles from "./ColorLineup.module.css";
 import { TINTS } from "@/lib/tints";
+import { sceneMaterial } from "@/lib/lens-scene";
 
 export default function ColorLineup() {
   return (
@@ -32,7 +33,7 @@ export default function ColorLineup() {
             <Link href={`/shades/${tint.slug}`} className={styles.cardLink}>
               <div className={styles.frame}>
                 <Image
-                  src={tint.mainImage}
+                  src={sceneMaterial(tint.slug)}
                   alt={`${tint.name} Shadow tint applied to glasses`}
                   fill
                   sizes="(min-width: 1040px) 22vw, (min-width: 640px) 30vw, 90vw"

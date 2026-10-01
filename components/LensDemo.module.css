@@ -1,0 +1,107 @@
+.layout {
+  --hero-offset: 6.25rem;
+  --film-loose: 0;
+  --film-seated: 1;
+  --demo-progress: 100%;
+  --film-annotations: 0;
+  --fit-annotations: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: var(--space-lg);
+  padding-block: var(--space-lg) var(--space-xl);
+  max-width: 1600px;
+}
+.intro { align-self: start; }
+.sequence { min-width: 0; }
+.stage { margin: 0; padding-block: var(--space-md); }
+.scene { position: relative; width: 100%; aspect-ratio: 1672 / 941; }
+.poster { object-fit: contain; }
+.optical { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; visibility: hidden; }
+.layout[data-ready="true"] .optical { visibility: visible; }
+.layout[data-ready="true"] .poster { visibility: hidden; }
+.film { isolation: isolate; }
+.looseMaterial { opacity: calc(1 - var(--film-seated)); }
+.seatedMaterial { opacity: var(--film-seated); }
+.flexGlint { fill: none; stroke: var(--paper); stroke-width: 9; stroke-linecap: round; opacity: calc(var(--film-loose) * 0.2); }
+.annotation {
+  position: absolute; display: flex; flex-direction: column; gap: var(--space-xs);
+  font-family: var(--font-technical); font-size: var(--text-caption); line-height: 1.6;
+  color: var(--ink-secondary); pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-out-quart);
+}
+.annotation span { background: var(--paper); padding-inline: var(--space-3xs); }
+.annotation i { display: block; width: 1px; height: var(--space-xl); background: var(--border-strong); transform: rotate(-24deg); transform-origin: top; margin-left: var(--space-lg); }
+.filmLabel { top: 0; right: 21%; opacity: var(--film-annotations); }
+.lensLabel { left: 11%; bottom: 0; opacity: var(--film-annotations); }
+.lensLabel i { align-self: center; transform: rotate(28deg); }
+.fitLabel { top: 0; right: 16%; opacity: var(--fit-annotations); }
+.progress { height: 2px; background: var(--border); }
+.progress span { display: block; height: 100%; width: var(--demo-progress); background: var(--ink); }
+.caption { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); padding-block: var(--space-md); border-bottom: 1px solid var(--border); }
+.stageCopy { min-height: 4rem; }
+.captionTitle { font-family: var(--font-technical); font-size: var(--text-label); color: var(--ink); }
+.captionDetail { font-size: var(--text-body); color: var(--ink-secondary); max-width: 36ch; margin-top: var(--space-2xs); text-wrap: pretty; }
+.stages { display: flex; gap: var(--space-3xs); flex-shrink: 0; }
+.stageButton { width: 44px; min-height: 44px; padding: 0; border-radius: 50%; font-family: var(--font-technical); font-size: var(--text-caption); }
+.stageButton[aria-pressed="true"] { background: var(--ink); color: var(--ink-inverse); border-color: var(--ink); }
+.stageButton:disabled { opacity: 1; }
+.stageButton[aria-pressed="true"]:focus-visible { outline-offset: 4px; }
+.tints { padding-top: var(--space-lg); }
+.tintHeading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2xs); font-size: var(--text-body); }
+.tintName { font-family: var(--font-technical); font-size: var(--text-caption); color: var(--ink-secondary); }
+.swatches { display: flex; flex-wrap: wrap; gap: var(--space-3xs); margin-top: var(--space-xs); }
+.swatch { width: 44px; height: 44px; min-height: 44px; padding: var(--space-2xs); border-radius: 50%; border-color: transparent; }
+.swatch span:first-child { display: block; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border-strong); transition: transform var(--duration-base) var(--ease-out-expo); }
+.swatch[aria-pressed="true"] { border-color: var(--ink); }
+.swatch:disabled { opacity: 1; }
+.replacement, .error { margin-top: var(--space-xs); color: var(--ink-secondary); font-size: var(--text-caption); line-height: 1.6; }
+.error { max-width: 50ch; }
+@media (hover: hover) { .swatch:not(:disabled):hover span:first-child { transform: scale(1.12); } }
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .layout[data-motion="true"] .sequence { min-height: 380svh; }
+  .layout[data-motion="true"] .intro, .layout[data-motion="true"] .stage { position: sticky; top: var(--hero-offset); }
+  .stage { padding-top: var(--space-xl); }
+}
+@media (max-width: 999px) {
+  .layout { display: block; padding-block: var(--space-sm) var(--space-xl); }
+  .stage { padding-block: var(--space-md); }
+  .scene { aspect-ratio: 1672 / 1100; }
+  .captionDetail { max-width: 40ch; }
+}
+@media (max-width: 999px) and (prefers-reduced-motion: no-preference) {
+  .layout[data-motion="true"] .sequence { min-height: 340svh; }
+  .layout[data-motion="true"] .stage { position: sticky; top: var(--hero-offset); }
+}
+@media (max-width: 599px) {
+  .scene { width: calc(100% + var(--space-lg)); margin-left: calc(-1 * var(--space-sm)); aspect-ratio: 1672 / 1270; }
+  .annotation { font-size: 0.625rem; }
+  .annotation i { height: var(--space-md); }
+  .filmLabel { top: 9%; right: 18%; }
+  .fitLabel { top: 9%; right: 12%; }
+  .lensLabel { bottom: 7%; left: 11%; }
+  .caption { gap: var(--space-xs); align-items: flex-start; flex-direction: column; }
+  .stageCopy { min-height: 4.5rem; }
+  .stages { align-self: flex-end; }
+  .captionDetail { font-size: var(--text-label); }
+  .tints { padding-top: var(--space-md); }
+  .swatches { gap: 0; }
+  .swatches { width: calc(100% + var(--space-lg)); margin-left: calc(-1 * var(--space-sm)); }
+  .tintHeading { flex-direction: column; }
+}
+@media (max-width: 599px) and (max-height: 720px) {
+  .stage { padding-block: 0; }
+  .scene { aspect-ratio: 1672 / 1050; }
+  .caption { padding-block: var(--space-sm); }
+  .caption { flex-direction: row; align-items: center; }
+  .stageButton { width: 36px; min-height: 44px; }
+  .captionDetail { font-size: var(--text-caption); }
+  .stageCopy { min-height: 4rem; }
+  .captionTitle { font-size: var(--text-caption); }
+  .swatch { width: 40px; }
+  .tints { padding-top: var(--space-sm); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sequence { min-height: 0; }
+  .intro, .stage { position: static; }
+  .annotation { transition: none; }
+}
