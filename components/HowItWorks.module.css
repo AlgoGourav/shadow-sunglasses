@@ -36,7 +36,7 @@
 .step {
   display: grid;
   gap: var(--space-sm);
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: auto auto auto auto;
 }
 
 .frame {
@@ -74,6 +74,7 @@
 }
 
 @media (min-width: 1040px) {
+  .stepText { min-height: 5.5em; }
   .steps {
     grid-template-columns: repeat(4, 1fr);
   }

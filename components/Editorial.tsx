@@ -7,31 +7,31 @@ const shots = [
     image: "/images/lookbook-brown-gold.png",
     caption: "Brown Gold · coastal evening",
     alt: "Brown Gold Shadow tint worn at golden hour above a coastal town",
-    size: styles.tall,
+    width: 941, height: 1672,
   },
   {
     image: "/images/lookbook-golden-hour.png",
     caption: "Golden hour, anywhere",
     alt: "Warm mirrored Shadow tint catching the sunset",
-    size: styles.tall,
+    width: 941, height: 1672,
   },
   {
     image: "/images/lookbook-forest-green.png",
     caption: "Forest Green · deep in it",
     alt: "Forest Green Shadow tint worn in a misty forest",
-    size: styles.wide,
+    width: 941, height: 1672,
   },
   {
     image: "/images/lookbook-matte-black.png",
     caption: "Matte Black · architectural",
     alt: "Matte Black Shadow tint worn against concrete architecture",
-    size: styles.wide,
+    width: 941, height: 1672,
   },
   {
     image: "/images/lookbook-aurora-gradient.png",
     caption: "Aurora Gradient · under city light",
     alt: "Aurora Gradient Shadow tint reflecting neon city light",
-    size: styles.wide,
+    width: 1023, height: 1537,
   },
 ];
 
@@ -55,12 +55,13 @@ export default function Editorial() {
             as="li"
             key={shot.image}
             delayStep={i + 1}
-            className={`${styles.item} ${shot.size}`}
+            className={styles.item}
           >
             <Image
               src={shot.image}
               alt={shot.alt}
-              fill
+              width={shot.width}
+              height={shot.height}
               sizes="(min-width: 720px) 45vw, 90vw"
               loading="lazy"
             />

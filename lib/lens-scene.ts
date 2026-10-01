@@ -7,8 +7,8 @@ export const SCENE = { width: 1672, height: 941 };
 type Point = readonly [number, number];
 type Lens = { minX: number; width: number; lift: Point };
 export const LENSES: readonly Lens[] = [
-  { minX: 194, width: 350, lift: [-88,85] },
-  { minX: 651, width: 519, lift: [48,-86] },
+  { minX: 194, width: 350, lift: [-160,120] },
+  { minX: 651, width: 519, lift: [100,-130] },
 ];
 export function aperturePath(index: number, flex = 0): string {
   const lens = LENSES[index];

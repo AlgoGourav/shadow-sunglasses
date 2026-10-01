@@ -51,6 +51,9 @@ export default function HowItWorks() {
         <ol className={styles.steps}>
           {steps.map((step, i) => (
             <Reveal as="li" key={step.n} delayStep={i + 1} className={styles.step}>
+              <span className={styles.index} aria-hidden="true">{step.n}</span>
+              <h3 className={styles.stepTitle}>{step.title}</h3>
+              <p className={styles.stepText}>{step.text}</p>
               <div className={styles.frame}>
                 <Image
                   src={step.image}
@@ -60,11 +63,6 @@ export default function HowItWorks() {
                   loading="lazy"
                 />
               </div>
-              <span className={`${styles.index}`} aria-hidden="true">
-                {step.n}
-              </span>
-              <h3 className={styles.stepTitle}>{step.title}</h3>
-              <p className={styles.stepText}>{step.text}</p>
             </Reveal>
           ))}
         </ol>

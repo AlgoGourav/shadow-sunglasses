@@ -40,7 +40,7 @@
   object-fit: contain;
 }
 
-.beforeLayer {
+.afterLayer {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -58,11 +58,11 @@
 }
 
 .tagBefore {
-  left: var(--space-md);
+  right: var(--space-md);
 }
 
 .tagAfter {
-  right: var(--space-md);
+  left: var(--space-md);
 }
 
 .handle {
@@ -72,7 +72,7 @@
   z-index: 2;
   width: 2px;
   height: 100%;
-  background: var(--paper);
+  background: var(--ink);
   transform: translateX(-50%);
   pointer-events: none;
   display: flex;
@@ -92,6 +92,8 @@
 
 .handle svg {
   position: relative;
+  z-index: 1;
+  flex-shrink: 0;
   width: 1.5rem;
   height: 1.5rem;
   color: var(--ink);
@@ -102,14 +104,17 @@
   inset: 0;
   z-index: 3;
   width: 100%;
-  height: 100%;
+  height: auto;
+  bottom: auto;
+  aspect-ratio: 1672 / 941;
   margin: 0;
   opacity: 0;
   cursor: ew-resize;
   appearance: none;
   -webkit-appearance: none;
-  touch-action: none;
+  touch-action: pan-y;
 }
+.instruction { margin-top: var(--space-xs); font-size: var(--text-label); color: var(--ink-secondary); }
 
 .slider::-webkit-slider-thumb {
   appearance: none;

@@ -41,8 +41,8 @@ export default function LensDemo({ children }: { children: ReactNode }) {
   function paint(progress: number) {
     const p = clamp(progress);
     value.current = p;
-    // Approach, hold just off the glass, then make contact in a separate beat.
-    const approach = p < 0.55 ? smooth((p-0.18)/0.27)*0.55 : 0.55+smooth((p-0.55)/0.28)*0.45;
+    // Respond from the first pixel of scroll, without opening or alignment holds.
+    const approach = Math.min(1, p/0.9);
     const loose = 1-approach;
     LENSES.forEach((lens,i) => {
       groups.current[i]?.setAttribute("transform", `translate(${lens.lift[0]*loose} ${lens.lift[1]*loose})`);
@@ -52,10 +52,10 @@ export default function LensDemo({ children }: { children: ReactNode }) {
     root.current?.style.setProperty("--demo-progress", `${p*100}%`);
     // Fitted reflections only appear after the film is flat and stationary;
     // otherwise photographed rim details would travel with the loose film.
-    root.current?.style.setProperty("--film-seated", String(smooth((p-0.83)/0.06)));
+    root.current?.style.setProperty("--film-seated", String(smooth((p-0.9)/0.06)));
     root.current?.style.setProperty("--film-annotations", String(1-smooth((p-0.5)/0.12)));
-    root.current?.style.setProperty("--fit-annotations", String(smooth((p-0.89)/0.06)));
-    const next = p < 0.22 ? 0 : p < 0.55 ? 1 : p < 0.9 ? 2 : 3;
+    root.current?.style.setProperty("--fit-annotations", String(smooth((p-0.95)/0.04)));
+    const next = p < 0.22 ? 0 : p < 0.55 ? 1 : p < 0.96 ? 2 : 3;
     setPhase(current => current === next ? current : next);
   }
 
@@ -169,6 +169,7 @@ export default function LensDemo({ children }: { children: ReactNode }) {
       <div ref={sequence} className={styles.sequence}>
         <figure ref={stage} className={styles.stage} aria-label="Shadow film application demonstration">
           <div className={styles.scene}>
+            <p className={styles.scrollCue}>{phase===3 ? "Applied. Keep scrolling to compare." : "Scroll down to apply the film."}</p>
             <Image className={styles.poster} src="/images/hero-optical-blue.webp" alt="Blue Mirror film covering the full front surface of both prescription lenses in the same silver glasses" fill priority sizes="(min-width: 1000px) 60vw, 100vw" />
             <svg className={styles.optical} viewBox={`0 0 ${SCENE.width} ${SCENE.height}`} role="img" aria-labelledby={`${id}-title`}>
               <title id={`${id}-title`}>{`Pre-cut ${tint.name} adhesive films apply to the front of existing prescription lenses, covering them to the rim.`}</title>

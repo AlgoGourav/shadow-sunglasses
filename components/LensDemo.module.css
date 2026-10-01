@@ -15,6 +15,7 @@
 .sequence { min-width: 0; }
 .stage { margin: 0; padding-block: var(--space-md); }
 .scene { position: relative; width: 100%; aspect-ratio: 1672 / 941; }
+.scrollCue { position: absolute; left: 0; top: 0; z-index: 1; font-size: var(--text-caption); color: var(--ink-secondary); background: var(--paper); padding: var(--space-3xs); }
 .poster { object-fit: contain; }
 .optical { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; visibility: hidden; }
 .layout[data-ready="true"] .optical { visibility: visible; }
@@ -63,13 +64,13 @@
   .stage { padding-top: var(--space-xl); }
 }
 @media (max-width: 999px) {
-  .layout { display: block; padding-block: var(--space-sm) var(--space-xl); }
+  .layout { display: block; padding-block: var(--space-sm); }
   .stage { padding-block: var(--space-md); }
   .scene { aspect-ratio: 1672 / 1100; }
   .captionDetail { max-width: 40ch; }
 }
 @media (max-width: 999px) and (prefers-reduced-motion: no-preference) {
-  .layout[data-motion="true"] .sequence { min-height: 340svh; }
+  .layout[data-motion="true"] .sequence { min-height: 150svh; }
   .layout[data-motion="true"] .stage { position: sticky; top: var(--hero-offset); }
 }
 @media (max-width: 599px) {

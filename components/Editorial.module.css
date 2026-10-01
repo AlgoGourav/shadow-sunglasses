@@ -32,36 +32,25 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-md);
+  align-items: start;
 }
 
 .item {
   position: relative;
   overflow: hidden;
-  background: var(--paper-sunk);
+  background: var(--paper);
 }
 
 .item :global(img) {
-  object-fit: cover;
-  object-position: top;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .caption {
-  position: absolute;
-  left: var(--space-sm);
-  bottom: var(--space-sm);
-  z-index: 1;
-  color: var(--ink-inverse);
-  background: oklch(10% 0 0 / 0.55);
-  padding: var(--space-3xs) var(--space-xs);
-  backdrop-filter: blur(6px);
-}
-
-.tall {
-  aspect-ratio: 3 / 4;
-}
-
-.wide {
-  aspect-ratio: 4 / 3;
+  display: block;
+  color: var(--ink-secondary);
+  padding-block: var(--space-xs);
 }
 
 @media (min-width: 720px) {
