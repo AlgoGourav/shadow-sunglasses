@@ -43,10 +43,6 @@ export default function Editorial() {
           Your call, every time
         </span>
         <h2 className={styles.heading}>Every tint, in its own light.</h2>
-        <p className={styles.lede}>
-          Coastal dusk, city concrete, deep in the trees: same eight tints,
-          wherever you end up wearing them.
-        </p>
       </Reveal>
 
       <ul className={styles.grid}>

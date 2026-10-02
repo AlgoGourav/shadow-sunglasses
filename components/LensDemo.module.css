@@ -39,7 +39,7 @@
 .progress { height: 2px; background: var(--border); }
 .progress span { display: block; height: 100%; width: var(--demo-progress); background: var(--ink); }
 .caption { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); padding-block: var(--space-md); border-bottom: 1px solid var(--border); }
-.stageCopy { min-height: 4rem; }
+.stageCopy { min-width: 0; }
 .captionTitle { font-family: var(--font-technical); font-size: var(--text-label); color: var(--ink); }
 .captionDetail { font-size: var(--text-body); color: var(--ink-secondary); max-width: 36ch; margin-top: var(--space-2xs); text-wrap: pretty; }
 .stages { display: flex; gap: var(--space-3xs); flex-shrink: 0; }
@@ -47,7 +47,7 @@
 .stageButton[aria-pressed="true"] { background: var(--ink); color: var(--ink-inverse); border-color: var(--ink); }
 .stageButton:disabled { opacity: 1; }
 .stageButton[aria-pressed="true"]:focus-visible { outline-offset: 4px; }
-.tints { padding-top: var(--space-lg); }
+.tints { padding-block: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--border); margin-bottom: var(--space-md); }
 .tintHeading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2xs); font-size: var(--text-body); }
 .tintName { font-family: var(--font-technical); font-size: var(--text-caption); color: var(--ink-secondary); }
 .swatches { display: flex; flex-wrap: wrap; gap: var(--space-3xs); margin-top: var(--space-xs); }
@@ -61,7 +61,8 @@
 @media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
   .layout[data-motion="true"] .sequence { min-height: 380svh; }
   .layout[data-motion="true"] .intro, .layout[data-motion="true"] .stage { position: sticky; top: var(--hero-offset); }
-  .stage { padding-top: var(--space-xl); }
+  .stage { padding-top: var(--space-sm); }
+  .scene { max-height: calc(100svh - var(--hero-offset) - var(--space-4xl) - var(--space-3xl)); }
 }
 @media (max-width: 999px) {
   .layout { display: block; padding-block: var(--space-sm); }
@@ -70,7 +71,7 @@
   .captionDetail { max-width: 40ch; }
 }
 @media (max-width: 999px) and (prefers-reduced-motion: no-preference) {
-  .layout[data-motion="true"] .sequence { min-height: 150svh; }
+  .layout[data-motion="true"] .sequence { min-height: 280svh; }
   .layout[data-motion="true"] .stage { position: sticky; top: var(--hero-offset); }
 }
 @media (max-width: 599px) {
@@ -81,7 +82,7 @@
   .fitLabel { top: 9%; right: 12%; }
   .lensLabel { bottom: 7%; left: 11%; }
   .caption { gap: var(--space-xs); align-items: flex-start; flex-direction: column; }
-  .stageCopy { min-height: 4.5rem; }
+  .stageCopy { min-height: 0; }
   .stages { align-self: flex-end; }
   .captionDetail { font-size: var(--text-label); }
   .tints { padding-top: var(--space-md); }
@@ -96,7 +97,7 @@
   .caption { flex-direction: row; align-items: center; }
   .stageButton { width: 36px; min-height: 44px; }
   .captionDetail { font-size: var(--text-caption); }
-  .stageCopy { min-height: 4rem; }
+  .stageCopy { min-height: 0; }
   .captionTitle { font-size: var(--text-caption); }
   .swatch { width: 40px; }
   .tints { padding-top: var(--space-sm); }

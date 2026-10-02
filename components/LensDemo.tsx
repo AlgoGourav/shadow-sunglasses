@@ -9,7 +9,7 @@ import styles from "./LensDemo.module.css";
 
 const clamp = (n: number) => Math.min(1, Math.max(0, n));
 const smooth = (n: number) => { const p = clamp(n); return p*p*(3-2*p); };
-const STAGES = ["Separate film", "Align to the rim", "Apply film", "Finished"];
+const STAGES = ["Peel from sheet", "Align to the rim", "press to apply", "Ready to roll!"];
 async function loadImage(src: string) {
   const image = new window.Image();
   image.src = src;
@@ -41,7 +41,6 @@ export default function LensDemo({ children }: { children: ReactNode }) {
   function paint(progress: number) {
     const p = clamp(progress);
     value.current = p;
-    // Respond from the first pixel of scroll, without opening or alignment holds.
     const approach = Math.min(1, p/0.9);
     const loose = 1-approach;
     LENSES.forEach((lens,i) => {
@@ -73,10 +72,15 @@ export default function LensDemo({ children }: { children: ReactNode }) {
       const offset = navHeight+16;
       node.style.setProperty("--hero-offset", `${offset}px`);
       const travel = Math.max(1, host.offsetHeight-stage.current!.offsetHeight);
-      paint((offset-host.getBoundingClientRect().top)/travel);
+      // Keep the opening and finished states on screen before moving on.
+      paint((clamp((offset-host.getBoundingClientRect().top)/travel)-0.12)/0.76);
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
-    const onScroll = () => { manual.current = false; schedule(); };
+    const onScroll = () => {
+      const bounds = (window.innerWidth < 1000 ? sequence.current! : node).getBoundingClientRect();
+      if (bounds.bottom <= 0 || bounds.top >= innerHeight) manual.current = false;
+      schedule();
+    };
     const configure = () => {
       reduced.current = preference.matches;
       node.dataset.motion = String(loaded && !preference.matches);
@@ -168,8 +172,13 @@ export default function LensDemo({ children }: { children: ReactNode }) {
       <div className={styles.intro}>{children}</div>
       <div ref={sequence} className={styles.sequence}>
         <figure ref={stage} className={styles.stage} aria-label="Shadow film application demonstration">
+          <div className={styles.tints}>
+            <div className={styles.tintHeading}><span className={styles.tintName}>{tint.name} · {tint.uv}</span></div>
+            <div className={styles.swatches} role="group" aria-label="Choose a fresh film tint">{TINTS.map(item => <Button key={item.slug} variant="ghost" className={styles.swatch} aria-label={`Preview ${item.name}`} title={item.name} aria-pressed={selected===item.slug} disabled={!ready || busy} onClick={() => void chooseTint(item.slug)}><span style={{background:`var(--tint-${item.slug})`}} /><span className="visually-hidden">{item.name}</span></Button>)}</div>
+            {busy && <p className={styles.replacement} role="status">Replacing with a fresh film…</p>}
+            {error && <p className={styles.error} role="status">{error}</p>}
+          </div>
           <div className={styles.scene}>
-            <p className={styles.scrollCue}>{phase===3 ? "Applied. Keep scrolling to compare." : "Scroll down to apply the film."}</p>
             <Image className={styles.poster} src="/images/hero-optical-blue.webp" alt="Blue Mirror film covering the full front surface of both prescription lenses in the same silver glasses" fill priority sizes="(min-width: 1000px) 60vw, 100vw" />
             <svg className={styles.optical} viewBox={`0 0 ${SCENE.width} ${SCENE.height}`} role="img" aria-labelledby={`${id}-title`}>
               <title id={`${id}-title`}>{`Pre-cut ${tint.name} adhesive films apply to the front of existing prescription lenses, covering them to the rim.`}</title>
@@ -187,24 +196,15 @@ export default function LensDemo({ children }: { children: ReactNode }) {
                 </g>
               ))}
             </svg>
-            <div className={`${styles.annotation} ${styles.filmLabel}`} aria-hidden="true"><span>Thin adhesive film</span><i /></div>
-            <div className={`${styles.annotation} ${styles.lensLabel}`} aria-hidden="true"><i /><span>Your prescription lens</span></div>
             <div className={`${styles.annotation} ${styles.fitLabel}`} aria-hidden="true"><span>Full coverage. Same frame.</span><i /></div>
           </div>
           <div className={styles.progress} aria-hidden="true"><span /></div>
           <figcaption className={styles.caption}>
             <div className={styles.stageCopy}>
               <p className={styles.captionTitle}>{String(phase+1).padStart(2,"0")} / 04 · {STAGES[phase]}</p>
-              <p className={styles.captionDetail}>{phase===0 ? "Pre-cut to your lens. Thin, flexible, adhesive." : phase===1 ? "Match the edges. The clear lens stays in the frame." : phase===2 ? "The film settles onto the front surface, all the way to the rim." : "Your prescription stays. Your glasses become sunglasses."}</p>
             </div>
             <div className={styles.stages} role="group" aria-label="View application stages">{STAGES.map((label,i) => <Button key={label} variant="ghost" className={styles.stageButton} aria-label={label} title={label} aria-pressed={phase===i} disabled={!ready} aria-disabled={busy} onClick={() => showStage(i)}>{i+1}</Button>)}</div>
           </figcaption>
-          <div className={styles.tints}>
-            <div className={styles.tintHeading}><span>Same frame. Fresh tint.</span><span className={styles.tintName}>{tint.name} · {tint.uv}</span></div>
-            <div className={styles.swatches} role="group" aria-label="Choose a fresh film tint">{TINTS.map(item => <Button key={item.slug} variant="ghost" className={styles.swatch} aria-label={`Preview ${item.name}`} title={item.name} aria-pressed={selected===item.slug} disabled={!ready} aria-disabled={busy} onClick={() => void chooseTint(item.slug)}><span style={{background:`var(--tint-${item.slug})`}} /><span className="visually-hidden">{item.name}</span></Button>)}</div>
-            <p className={styles.replacement} role="status" aria-live="polite">{busy ? "Replacing with a fresh film…" : "Peel off to remove. Apply a new film for your next tint."}</p>
-            {error && <p className={styles.error} role="status">{error}</p>}
-          </div>
         </figure>
       </div>
     </div>

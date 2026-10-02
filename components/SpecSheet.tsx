@@ -20,7 +20,7 @@ export default function SpecSheet() {
             <span className={`hand-accent ${styles.overline}`}>
               Unbelievably true
             </span>
-            <h2 className={styles.heading}>UV400 protection, full stop.</h2>
+            <h2 className={styles.heading}>UV protection</h2>
             <p className={styles.lede}>
               Shadow blocks UV the same way a ₹15,000 pair of sunglasses
               does. <span className="hand-accent">(Try for yourself.)</span>{" "}

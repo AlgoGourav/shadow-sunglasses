@@ -9,7 +9,7 @@ export default function ColorLineup() {
   return (
     <section id="colors" className={`${styles.section} container`}>
       <Reveal>
-        <h2 className={styles.heading}>Eight tints. One frame, any frame.</h2>
+        <h2 className={styles.heading}>Any frame</h2>
         <p className={styles.lede}>
           Every tint is the same peelable film. Pick a mood,{" "}
           <span className={styles.accent}>

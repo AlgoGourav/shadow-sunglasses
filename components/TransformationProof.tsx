@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
 import HandUnderline from "./HandUnderline";
+import Button from "./Button";
 import styles from "./TransformationProof.module.css";
 
 export default function TransformationProof() {
   const [position, setPosition] = useState(50);
+  const [scrollEnabled, setScrollEnabled] = useState(false);
+  const sliderId = useId();
+  const runway = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLDivElement>(null);
   const manual = useRef(false);
 
@@ -16,13 +20,23 @@ export default function TransformationProof() {
     let pending = 0;
     const update = () => {
       pending = 0;
-      if (preference.matches || manual.current || !frame.current) return;
-      const top = frame.current.getBoundingClientRect().top;
-      const progress = Math.min(1, Math.max(0, (innerHeight*0.7-top)/(innerHeight*0.5)));
-      setPosition(Math.round(progress*100));
+      if (!frame.current || !runway.current) return;
+      const offset = (document.querySelector("body > header")?.getBoundingClientRect().height ?? 80) + 16;
+      runway.current.style.setProperty("--compare-offset", `${offset}px`);
+      const enabled = !preference.matches && innerWidth >= 780 && frame.current.offsetHeight < innerHeight-offset-32;
+      setScrollEnabled(enabled);
+      if (!enabled || manual.current) return;
+      const travel = Math.max(1, runway.current.offsetHeight-frame.current.offsetHeight);
+      const progress = (offset-runway.current.getBoundingClientRect().top)/travel;
+      // Begin only once the comparison is pinned, with a hold at either end.
+      setPosition(Math.round(Math.min(1, Math.max(0, (progress-0.12)/0.76))*100));
     };
     const schedule = () => { if (!pending) pending = requestAnimationFrame(update); };
-    const onScroll = () => { manual.current = false; schedule(); };
+    const onScroll = () => {
+      const bounds = runway.current?.getBoundingClientRect();
+      if (bounds && (bounds.bottom <= 0 || bounds.top >= innerHeight)) manual.current = false;
+      schedule();
+    };
     window.addEventListener("scroll", onScroll, {passive:true});
     window.addEventListener("resize", schedule);
     preference.addEventListener("change", schedule);
@@ -36,10 +50,10 @@ export default function TransformationProof() {
   }, []);
 
   return (
-    <section className={`${styles.section} container`}>
+    <section id="compare" className={`${styles.section} container`}>
       <Reveal>
         <h2 className={styles.heading}>
-          Same glasses. Drag to see{" "}
+          See{" "}
           <HandUnderline mode="scrub">the difference.</HandUnderline>
         </h2>
         <p className={styles.lede}>
@@ -48,12 +62,12 @@ export default function TransformationProof() {
         </p>
       </Reveal>
 
-      <Reveal delayStep={1} className={styles.compareWrap}>
-        <div className={styles.compare} style={{ "--pos": `${position}%` } as React.CSSProperties}>
+      <div ref={runway} className={styles.compareWrap} data-scroll={scrollEnabled}>
+        <div ref={frame} className={styles.compare} style={{ "--pos": `${position}%` } as React.CSSProperties}>
           <span className={`mono-label ${styles.tag} ${styles.tagBefore}`} style={{opacity:position>=95?0:1}} aria-hidden={position>=95}>Before</span>
           <span className={`mono-label ${styles.tag} ${styles.tagAfter}`} style={{opacity:position<=5?0:1}} aria-hidden={position<=5}>After</span>
 
-          <div ref={frame} className={styles.frame}>
+          <div className={styles.frame}>
             <Image
               src="/images/hero-optical-clear.webp"
               alt="Clear prescription glasses with no tint applied"
@@ -75,19 +89,27 @@ export default function TransformationProof() {
             </div>
           </div>
 
+          <div className={styles.controls}>
+          <label htmlFor={sliderId}>Before</label>
           <input
+            id={sliderId}
             type="range"
             min={0}
             max={100}
             value={position}
             onChange={(event) => { manual.current = true; setPosition(Number(event.target.value)); }}
             className={styles.slider}
-            aria-label="Drag to compare before and after"
+            aria-label="Compare before and after"
             aria-valuetext={`${position}% tinted. Move right to apply the tint.`}
           />
-          <p className={styles.instruction}>Scroll to reveal the tint left to right. Or swipe the divider.</p>
+          <span>After</span>
+          </div>
+          <p className={styles.instruction}>{scrollEnabled ? "Scroll to compare, or drag the slider below." : "Drag the slider to compare."}</p>
         </div>
-      </Reveal>
+      </div>
+      <div className={styles.next}>
+        <Button href="#how-it-works" variant="ghost">how to apply</Button>
+      </div>
     </section>
   );
 }
