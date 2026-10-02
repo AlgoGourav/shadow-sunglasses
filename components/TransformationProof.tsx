@@ -69,7 +69,7 @@ export default function TransformationProof() {
       current.dragging = true;
       manual.current = true;
     }
-    setPosition(Math.round(Math.min(100, Math.max(0, current.position-dx/photograph.current.offsetWidth*100))));
+    setPosition(Math.round(Math.min(100, Math.max(0, current.position+dx/photograph.current.offsetWidth*100))));
   }
 
   function endGesture(event: PointerEvent<HTMLButtonElement>) {
@@ -100,8 +100,8 @@ export default function TransformationProof() {
       </Reveal>
 
       <div ref={runway} className={styles.compareWrap} data-scroll={scrollEnabled}>
-        <div ref={frame} className={styles.compare} style={{ "--split": `${100-position}%` } as React.CSSProperties}>
-          <div className={styles.labels} aria-hidden="true"><span>Before</span><span>After</span></div>
+        <div ref={frame} className={styles.compare} style={{ "--split": `${position}%` } as React.CSSProperties}>
+          <div className={styles.labels} aria-hidden="true"><span>After</span><span>Before</span></div>
 
           <div ref={photograph} className={styles.frame}>
             <Image

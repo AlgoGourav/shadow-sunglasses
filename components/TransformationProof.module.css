@@ -8,7 +8,7 @@
 .labels { display: flex; justify-content: space-between; padding-bottom: var(--space-xs); font-family: var(--font-technical); font-size: var(--text-caption); text-transform: uppercase; }
 .frame { position: relative; aspect-ratio: 1672 / 941; background: var(--paper); }
 .frame :global(img) { object-fit: contain; user-select: none; pointer-events: none; }
-.afterLayer { position: absolute; inset: 0; z-index: 1; clip-path: inset(0 0 0 var(--split, 50%)); pointer-events: none; }
+.afterLayer { position: absolute; inset: 0; z-index: 1; clip-path: inset(0 calc(100% - var(--split, 50%)) 0 0); pointer-events: none; }
 .divider { position: absolute; top: 0; bottom: 0; left: var(--split, 50%); z-index: 2; width: 1px; background: var(--ink); pointer-events: none; }
 .handle { position: absolute; top: 50%; left: clamp(1.375rem, var(--split, 50%), calc(100% - 1.375rem)); transform: translate(-50%, -50%); z-index: 3; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid var(--ink); border-radius: 50%; background: var(--paper); color: var(--ink); display: grid; place-items: center; touch-action: pan-y pinch-zoom; cursor: ew-resize; }
 .handle svg { width: 1.5rem; height: 1.5rem; pointer-events: none; }
