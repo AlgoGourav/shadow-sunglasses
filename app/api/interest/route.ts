@@ -27,19 +27,23 @@ export async function POST(request: Request) {
     );
   }
 
+  if (typeof body !== "object" || body === null || Array.isArray(body)) {
+    return NextResponse.json({ error: "Please submit your reservation details." }, { status: 400 });
+  }
+
   const { name, email, phone, address, packSize, colorPreference, cartItems } = (body ?? {}) as Record<
     string,
     unknown
   >;
 
-  if (typeof name !== "string" || name.trim().length < 2) {
+  if (typeof name !== "string" || name.trim().length < 2 || name.trim().length > 200) {
     return NextResponse.json(
       { error: "Please enter your full name." },
       { status: 400 }
     );
   }
 
-  if (typeof email !== "string" || !EMAIL_RE.test(email.trim())) {
+  if (typeof email !== "string" || email.trim().length > 320 || !EMAIL_RE.test(email.trim())) {
     return NextResponse.json(
       { error: "Email addresses need an @ and a domain. Try: name@example.com" },
       { status: 400 }
@@ -53,7 +57,7 @@ export async function POST(request: Request) {
     );
   }
 
-  if (typeof address !== "string" || address.trim().length < 10) {
+  if (typeof address !== "string" || address.trim().length < 10 || address.trim().length > 2000) {
     return NextResponse.json(
       { error: "Please enter a delivery address we can ship to." },
       { status: 400 }
@@ -76,7 +80,7 @@ export async function POST(request: Request) {
 
   let validatedCartItems: { tintSlug: string; packSize: "1" | "3" | "6"; quantity: number }[] | undefined;
   if (cartItems !== undefined) {
-    if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    if (!Array.isArray(cartItems) || cartItems.length === 0 || cartItems.length > 100) {
       return NextResponse.json(
         { error: "Your bag looks empty. Add a tint before reserving." },
         { status: 400 }
@@ -105,15 +109,24 @@ export async function POST(request: Request) {
     }
   }
 
-  const result = await addInterestSubmission({
-    name: name.trim(),
-    email: email.trim(),
-    phone: phone.replace(/\s+/g, ""),
-    address: address.trim(),
-    packSize: packSize as "1" | "3" | "6",
-    colorPreference,
-    ...(validatedCartItems ? { cartItems: validatedCartItems } : {}),
-  });
+  let result: Awaited<ReturnType<typeof addInterestSubmission>>;
+  try {
+    result = await addInterestSubmission({
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.replace(/\s+/g, ""),
+      address: address.trim(),
+      packSize: packSize as "1" | "3" | "6",
+      colorPreference,
+      ...(validatedCartItems ? { cartItems: validatedCartItems } : {}),
+    });
+  } catch {
+    console.error("Waitlist submission could not be saved.");
+    return NextResponse.json(
+      { error: "We couldn't save your reservation. Please try again shortly." },
+      { status: 503, headers: { "Retry-After": "30" } }
+    );
+  }
 
   if (result.status === "duplicate") {
     return NextResponse.json({

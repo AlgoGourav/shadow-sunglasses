@@ -1,5 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { supabaseRequest, SupabaseRequestError } from "./supabase-rest.mjs";
 
 export type CartItemSubmission = {
   tintSlug: string;
@@ -18,40 +17,29 @@ export type InterestSubmission = {
   createdAt: string;
 };
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const DATA_FILE = path.join(DATA_DIR, "interest-submissions.json");
-
-async function readAll(): Promise<InterestSubmission[]> {
-  try {
-    const raw = await readFile(DATA_FILE, "utf-8");
-    return JSON.parse(raw) as InterestSubmission[];
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
-    throw error;
-  }
-}
-
-async function writeAll(entries: InterestSubmission[]) {
-  await mkdir(DATA_DIR, { recursive: true });
-  await writeFile(DATA_FILE, JSON.stringify(entries, null, 2), "utf-8");
-}
-
 export async function addInterestSubmission(
   submission: Omit<InterestSubmission, "createdAt">
 ): Promise<{ status: "created" | "duplicate" }> {
-  const entries = await readAll();
-  const normalizedEmail = submission.email.trim().toLowerCase();
-
-  if (entries.some((entry) => entry.email === normalizedEmail)) {
-    return { status: "duplicate" };
+  try {
+    await supabaseRequest("waitlist_entries", {
+      method: "POST",
+      headers: { Prefer: "return=minimal" },
+      body: JSON.stringify({
+        name: submission.name,
+        email: submission.email.trim().toLowerCase(),
+        phone: submission.phone,
+        address: submission.address,
+        pack_size: submission.packSize,
+        color_preference: submission.colorPreference,
+        cart_items: submission.cartItems ?? [],
+      }),
+    });
+  } catch (error) {
+    // The unique email constraint also handles simultaneous signups atomically.
+    if (error instanceof SupabaseRequestError && error.code === "23505") {
+      return { status: "duplicate" };
+    }
+    throw error;
   }
-
-  entries.push({
-    ...submission,
-    email: normalizedEmail,
-    createdAt: new Date().toISOString(),
-  });
-  await writeAll(entries);
-
   return { status: "created" };
 }

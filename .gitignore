@@ -13,7 +13,8 @@
 *.pem
 
 # local env files
-.env*.local
+.env*
+!.env.example
 
 # vercel
 .vercel
@@ -22,5 +23,6 @@
 *.tsbuildinfo
 next-env.d.ts
 
-# local data store (interest signups) - swap for Supabase before launch
+# legacy local signup data (never commit customer details)
 /data/*.json
+/supabase/.temp/
